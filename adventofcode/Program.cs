@@ -27,8 +27,10 @@ namespace adventofcode
             //adventofcode._7.Solver.Run();
             //Console.WriteLine("++++++++++ 8 ++++++++++");
             //adventofcode._8.Solver.Run();
-            Console.WriteLine("++++++++++ 9 ++++++++++");
-            adventofcode._9.Solver.Run();
+            //Console.WriteLine("++++++++++ 9 ++++++++++");
+            //adventofcode._9.Solver.Run();
+            Console.WriteLine("++++++++++ 10 ++++++++++");
+            adventofcode._10.Solver.Run();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace adventofcode
     {
         static void Main(string[] args)
         {
+            Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
             //Console.WriteLine("++++++++++ 1 ++++++++++");
             //adventofcode._1.Solver.Run();
             //Console.WriteLine("++++++++++ 2 ++++++++++");
@@ -31,6 +33,10 @@ namespace adventofcode
             //adventofcode._9.Solver.Run();
             Console.WriteLine("++++++++++ 10 ++++++++++");
             adventofcode._10.Solver.Run();
+
+            watch.Stop();
+            Console.WriteLine("++++++++++ End ++++++++++");
+            Console.WriteLine("Time spent: " + watch.ElapsedMilliseconds.ToString() + " ms");
         }
     }
 }

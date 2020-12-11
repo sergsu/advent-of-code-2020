@@ -31,8 +31,10 @@ namespace adventofcode
             //adventofcode._8.Solver.Run();
             //Console.WriteLine("++++++++++ 9 ++++++++++");
             //adventofcode._9.Solver.Run();
-            Console.WriteLine("++++++++++ 10 ++++++++++");
-            adventofcode._10.Solver.Run();
+            //Console.WriteLine("++++++++++ 10 ++++++++++");
+            //adventofcode._10.Solver.Run();
+            Console.WriteLine("++++++++++ 11 ++++++++++");
+            adventofcode._11.Solver.Run();
 
             watch.Stop();
             Console.WriteLine("++++++++++ End ++++++++++");

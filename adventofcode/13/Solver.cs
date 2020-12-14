@@ -21,7 +21,6 @@ namespace adventofcode._13
             List<int> periods = lines[1].Split(',').ToList().ConvertAll<int>(line => line == "x" ? 0 : int.Parse(line));
             SolveOne(time, periods);
             Console.WriteLine("-----------------");
-            //SolveTwo(1696944481007258, periods);
             SolveTwo(time, periods);
         }
 

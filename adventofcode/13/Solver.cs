@@ -13,6 +13,7 @@ namespace adventofcode._13
             string[] lines = File.ReadAllLines("C:\\Users\\Sergey\\source\\repos\\adventofcode\\adventofcode\\13\\input.txt");
             //lines = "939;7,13,x,x,59,x,31,19".Split(";");
             //lines = "1;17,x,13,19".Split(";");
+            //lines = "1;67,7,59,61".Split(";");
             //lines = "1;67,x,7,59,61".Split(";");
             //lines = "1;67,7,x,59,61".Split(";");
             //lines = "1;1789,37,47,1889".Split(";");
@@ -38,47 +39,34 @@ namespace adventofcode._13
 
         private static void SolveTwo(long time, List<int> periods)
         {
-            long max = periods.Max();
-            int maxPosition = periods.IndexOf((int)max);
-            bool found = false;
+            Dictionary<int, int> sortedPeriods = periods
+                .Select((period, index) => new { period, index })
+                .Where(x => x.period > 0)
+                .ToDictionary(x => x.period, x => periods.Count - x.index)
+                .OrderByDescending(x => x.Value)
+                .ToDictionary(x => x.Key, x => x.Value);
 
-            for (long timeToCheck = time + ((max - (time % max)) % max) - maxPosition; timeToCheck < long.MaxValue; timeToCheck += max * 1000000 * 24)
+            long prod = sortedPeriods.Aggregate((long)1, (acc, period) => acc * period.Key);
+            long sum = 0;
+            foreach (KeyValuePair<int, int> period in sortedPeriods)
             {
-                Console.SetCursorPosition(0, 3);
-                Console.WriteLine(timeToCheck);
-                List<long> timesToCheck = Enumerable.Range(0, 24).Select(x => timeToCheck + x * max * 1000000).ToList();
+                long p = prod / period.Key;
 
-                Parallel.ForEach(timesToCheck, timeToCheck =>
+                long modularMultiplicativeInverse = 1;
+                long b = p % period.Key;
+                for (long i = 1; i < period.Key; i++)
                 {
-                    for (long innerTimeToCheck = timeToCheck; innerTimeToCheck < timeToCheck + max * 1000000; innerTimeToCheck += max)
+                    if ((b * i) % period.Key == 1)
                     {
-                        bool valid = true;
-                        for (int i = 0; i < periods.Count; i++)
-                        {
-                            if (periods[i] == 0)
-                            {
-                                continue;
-                            }
-                            if ((innerTimeToCheck + i) % periods[i] > 0)
-                            {
-                                valid = false;
-                                break;
-                            }
-                        }
-
-                        if (valid)
-                        {
-                            Console.WriteLine(innerTimeToCheck);
-                            found = true;
-                            break;
-                        }
+                        modularMultiplicativeInverse = i;
+                        break;
                     }
-                });
-                if (found)
-                {
-                    break;
                 }
+
+                sum += period.Value * modularMultiplicativeInverse * p;
             }
+
+            Console.WriteLine(sum % prod - periods.Count);
         }
     }
 }
